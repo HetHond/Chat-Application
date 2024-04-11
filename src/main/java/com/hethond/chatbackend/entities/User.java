@@ -1,8 +1,6 @@
 package com.hethond.chatbackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,23 +12,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NonNull
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NonNull
     @Column(nullable = false, name = "password_hash")
     private String passwordHash;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private Role role;
 
     @ManyToMany(mappedBy = "members")
     private Set<Channel> channels = new HashSet<>();
 
     public User() { }
 
-    public User(long id, @NonNull String username, @NonNull String passwordHash) {
+    public User(long id, String username, String passwordHash, Role role) {
         this.id = id;
         this.username = username;
         this.passwordHash = passwordHash;
+        this.role = role;
     }
 
     public long getId() {
@@ -41,21 +42,19 @@ public class User {
         this.id = id;
     }
 
-    @NonNull
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(@NonNull String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    @NonNull
     public String getPasswordHash() {
         return passwordHash;
     }
 
-    public void setPasswordHash(@NonNull String passwordHash) {
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
@@ -65,5 +64,13 @@ public class User {
 
     public void setChannels(Set<Channel> channels) {
         this.channels = channels;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
