@@ -26,4 +26,9 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(() -> ApiException.notFound("User not found"));
     }
+
+    public User findUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return user.orElseThrow(() -> ApiException.notFound("User not found"));
+    }
 }

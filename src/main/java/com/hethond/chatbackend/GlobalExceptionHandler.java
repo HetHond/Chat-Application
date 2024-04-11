@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Object>> handleException(Exception e, HttpServletRequest request) {
         ApiResponse<Object> response = ApiResponse.error(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Internal server error");
+                e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
