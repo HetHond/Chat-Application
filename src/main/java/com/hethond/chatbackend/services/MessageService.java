@@ -35,6 +35,10 @@ public class MessageService {
         return messageRepository.save(new Message(author, channel, content));
     }
 
+    public Message saveMessage(Message message) {
+        return messageRepository.save(message);
+    }
+
     public Message findMessageById(long id) {
         Optional<Message> message = messageRepository.findById(id);
         return message.orElseThrow(() ->new ApiException(HttpStatus.NOT_FOUND.value(), "Message not found"));
