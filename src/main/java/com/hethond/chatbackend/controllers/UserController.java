@@ -5,12 +5,11 @@ import com.hethond.chatbackend.entities.User;
 import com.hethond.chatbackend.entities.dto.UserWithChannelsDto;
 import com.hethond.chatbackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -35,6 +34,13 @@ public class UserController {
     public ResponseEntity<ApiResponse<UserWithChannelsDto>> getUserById(@PathVariable long id) {
         User user = userService.findUserById(id);
         return ResponseEntity.ok(ApiResponse.success(UserWithChannelsDto.fromUser(user)));
+    }
+
+    @GetMapping("/@me")
+    public ResponseEntity<ApiResponse<UserWithChannelsDto>> getUserByMe() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserWithChannelsDto userDto = UserWithChannelsDto.fromUser(user);
+        return ResponseEntity.ok(ApiResponse.success(userDto));
     }
 
     // TODO -- Implement update user method

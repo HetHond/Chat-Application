@@ -22,7 +22,7 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany(mappedBy = "members", fetch = FetchType.EAGER)
     private Set<Channel> channels = new HashSet<>();
 
     public User() { }
