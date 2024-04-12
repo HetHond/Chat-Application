@@ -1,7 +1,12 @@
 plugins {
 	java
+	application
 	id("org.springframework.boot") version "3.2.4"
 	id("io.spring.dependency-management") version "1.1.4"
+}
+
+application {
+	mainClass.set("com.hethond.chatbackend.ChatBackendApplication")
 }
 
 group = "com.hethond"
