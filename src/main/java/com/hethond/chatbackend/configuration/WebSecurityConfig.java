@@ -1,5 +1,6 @@
 package com.hethond.chatbackend.configuration;
 
+import com.hethond.chatbackend.security.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,7 @@ public class WebSecurityConfig {
         http.csrf(CsrfConfigurer::disable);
         http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/ws/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers("/users").hasRole("ADMIN")
                 .anyRequest().authenticated()

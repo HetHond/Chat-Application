@@ -1,4 +1,4 @@
-package com.hethond.chatbackend.configuration;
+package com.hethond.chatbackend.security;
 
 import com.hethond.chatbackend.entities.User;
 import com.hethond.chatbackend.services.JwtService;
