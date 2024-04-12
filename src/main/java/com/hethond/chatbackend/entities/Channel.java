@@ -50,6 +50,15 @@ public class Channel {
         this.members = members;
     }
 
+    public boolean hasMemberWithId(long userId) {
+        // TODO -- maybe there is a quicker way to determine this
+        for (User member : members) {
+            if (member.getId() == userId)
+                return true;
+        }
+        return false;
+    }
+
     public void addMember(User user) {
         members.add(user);
         user.getChannels().add(this);
