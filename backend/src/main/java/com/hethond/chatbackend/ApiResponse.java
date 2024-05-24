@@ -18,30 +18,13 @@ public class ApiResponse<T>  {
         return new ApiResponse<T>(code, message, null);
     }
 
-    public static <T> ApiResponse<T> error(@NonNull ResponseCode code,
-                                           @NonNull String message,
-                                           @Nullable String next) {
-        return new ApiResponse<>(code, message, null, next);
-    }
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private final ResponseCode code;
+
     private final String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final T data;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private final String next;
-
-    public ApiResponse(@NonNull ResponseCode code,
-                       @Nullable String message,
-                       @Nullable T data,
-                       @Nullable String next) {
-        this.code = code;
-        this.message = message;
-        this.data = data;
-        this.next = next;
-    }
 
     public ApiResponse(@NonNull ResponseCode code,
                        @Nullable String message,
@@ -49,11 +32,10 @@ public class ApiResponse<T>  {
         this.code = code;
         this.message = message;
         this.data = data;
-        this.next = null;
     }
 
     @NonNull
-    public int getCode() {
+    public ResponseCode getCode() {
         return code;
     }
 
