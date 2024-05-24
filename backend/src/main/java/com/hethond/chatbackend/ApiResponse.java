@@ -1,6 +1,5 @@
 package com.hethond.chatbackend;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
