@@ -60,7 +60,7 @@ public class MessageController {
 
         // TODO -- separate concerns (create a service for this part)
         for (User recipient : channel.getMembers()) {
-            messagingTemplate.convertAndSendToUser(Long.toString(recipient.getId()), "/topic/messages", createdMessageDto);
+            messagingTemplate.convertAndSendToUser(recipient.getId().toString(), "/topic/messages", createdMessageDto);
         }
 
         return ResponseEntity.ok(ApiResponse.success(createdMessageDto));

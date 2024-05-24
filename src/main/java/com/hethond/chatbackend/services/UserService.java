@@ -1,10 +1,9 @@
 package com.hethond.chatbackend.services;
 
-import com.hethond.chatbackend.ApiException;
-import com.hethond.chatbackend.entities.Channel;
+import com.hethond.chatbackend.entities.AccountStatus;
 import com.hethond.chatbackend.entities.Role;
 import com.hethond.chatbackend.entities.User;
-import com.hethond.chatbackend.repositories.ChannelRepository;
+import com.hethond.chatbackend.exceptions.NotFoundException;
 import com.hethond.chatbackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -12,35 +11,49 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
+    // TODO add logging to this service
+
     private final UserRepository userRepository;
-    private final ChannelService channelService;
 
     @Autowired
-    public UserService(UserRepository userRepository,
-                       ChannelService channelService) {
+    public UserService(final UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.channelService = channelService;
     }
 
     public List<User> findAllUsers() { return userRepository.findAll(); }
 
-    public User findUserById(long id) {
+    public User findUserById(final UUID id) {
         Optional<User> user = userRepository.findById(id);
-        return user.orElseThrow(() -> ApiException.notFound("User not found"));
+        return user.orElseThrow(() -> new NotFoundException("Could not find user by id [" + id + "]."));
     }
 
-    public User findUserByUsername(String username) {
+    public User findUserByUsername(final String username) {
         Optional<User> user = userRepository.findByUsername(username);
-        return user.orElseThrow(() -> ApiException.notFound("User not found"));
+        return user.orElseThrow(() -> new NotFoundException("Could not find user by id [" + username + "]."));
     }
 
-    public User createUser(String username, String password) {
-        User newUser = new User(username, BCrypt.hashpw(password, BCrypt.gensalt()), Role.USER);
-        Channel welcomeChannel = channelService.findChannelById(2);
-        welcomeChannel.addMember(newUser);
+    public User findUserByPhone(final String phone) {
+        Optional<User> user = userRepository.findByPhone(phone);
+        return user.orElseThrow(() -> new NotFoundException("Could not find user by phone number [" + phone + "]."));
+    }
+
+    public User createUser(final String username,
+                           final String password,
+                           final Role role,
+                           final AccountStatus accountStatus) {
+        return createUser(null, username, password, role, accountStatus);
+    }
+
+    public User createUser(final String phone,
+                           final String username,
+                           final String password,
+                           final Role role,
+                           final AccountStatus accountStatus) {
+        final User newUser = new User(phone, username, BCrypt.hashpw(password, BCrypt.gensalt()), role, accountStatus);
         return userRepository.save(newUser);
     }
 

@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<UserWithChannelsDto>> getUserById(@PathVariable long id) {
+    public ResponseEntity<ApiResponse<UserWithChannelsDto>> getUserById(@PathVariable UUID id) {
         User user = userService.findUserById(id);
         return ResponseEntity.ok(ApiResponse.success(UserWithChannelsDto.fromUser(user)));
     }

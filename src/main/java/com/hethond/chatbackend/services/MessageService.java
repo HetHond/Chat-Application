@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MessageService {
@@ -29,7 +30,7 @@ public class MessageService {
         this.channelService = channelService;
     }
 
-    public Message createMessage(long userId, long channelId, String content) {
+    public Message createMessage(UUID userId, long channelId, String content) {
         User author = userService.findUserById(userId);
         Channel channel = channelService.findChannelById(channelId);
         return messageRepository.save(new Message(author, channel, content));

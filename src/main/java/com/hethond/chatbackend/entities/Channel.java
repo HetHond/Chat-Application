@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "channels")
@@ -50,7 +51,7 @@ public class Channel {
         this.members = members;
     }
 
-    public boolean hasMemberWithId(long userId) {
+    public boolean hasMemberWithId(UUID userId) {
         // TODO -- maybe there is a quicker way to determine this
         for (User member : members) {
             if (member.getId() == userId)
