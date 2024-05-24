@@ -1,6 +1,6 @@
 package com.hethond.chatbackend.configuration;
 
-import com.hethond.chatbackend.security.JwtTokenFilter;
+import com.hethond.chatbackend.security.SessionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,11 +16,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private final JwtTokenFilter jwtTokenFilter;
+    private final SessionFilter sessionFilter;
 
     @Autowired
-    public WebSecurityConfig(final JwtTokenFilter jwtTokenFilter) {
-        this.jwtTokenFilter = jwtTokenFilter;
+    public WebSecurityConfig(final SessionFilter sessionFilter) {
+        this.sessionFilter = sessionFilter;
     }
 
     @Bean
@@ -30,13 +30,12 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/ws/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/*").permitAll()
                 .requestMatchers("/users").hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
 
-        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(sessionFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
