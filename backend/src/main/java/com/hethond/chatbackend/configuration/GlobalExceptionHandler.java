@@ -1,5 +1,8 @@
-package com.hethond.chatbackend;
+package com.hethond.chatbackend.configuration;
 
+import com.hethond.chatbackend.exceptions.ApiException;
+import com.hethond.chatbackend.response.ApiResponse;
+import com.hethond.chatbackend.response.ResponseCode;
 import com.hethond.chatbackend.exceptions.InactiveAccountException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

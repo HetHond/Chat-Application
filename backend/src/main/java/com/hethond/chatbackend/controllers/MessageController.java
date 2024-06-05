@@ -1,7 +1,7 @@
 package com.hethond.chatbackend.controllers;
 
-import com.hethond.chatbackend.ApiException;
-import com.hethond.chatbackend.ApiResponse;
+import com.hethond.chatbackend.exceptions.ApiException;
+import com.hethond.chatbackend.response.ApiResponse;
 import com.hethond.chatbackend.entities.Channel;
 import com.hethond.chatbackend.entities.Message;
 import com.hethond.chatbackend.entities.User;

@@ -1,6 +1,6 @@
 package com.hethond.chatbackend.controllers;
 
-import com.hethond.chatbackend.ApiResponse;
+import com.hethond.chatbackend.response.ApiResponse;
 import com.hethond.chatbackend.entities.User;
 import com.hethond.chatbackend.entities.dto.UserWithChannelsDto;
 import com.hethond.chatbackend.services.UserService;

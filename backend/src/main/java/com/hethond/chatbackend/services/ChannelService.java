@@ -1,6 +1,6 @@
 package com.hethond.chatbackend.services;
 
-import com.hethond.chatbackend.ApiException;
+import com.hethond.chatbackend.exceptions.ApiException;
 import com.hethond.chatbackend.entities.Channel;
 import com.hethond.chatbackend.repositories.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;

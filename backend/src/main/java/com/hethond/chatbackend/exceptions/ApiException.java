@@ -1,4 +1,4 @@
-package com.hethond.chatbackend;
+package com.hethond.chatbackend.exceptions;
 
 import org.springframework.http.HttpStatus;
 

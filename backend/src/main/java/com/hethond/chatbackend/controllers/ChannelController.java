@@ -1,15 +1,12 @@
 package com.hethond.chatbackend.controllers;
 
-import com.hethond.chatbackend.ApiResponse;
+import com.hethond.chatbackend.response.ApiResponse;
 import com.hethond.chatbackend.entities.Channel;
-import com.hethond.chatbackend.entities.User;
 import com.hethond.chatbackend.entities.dto.ChannelWithUsersDto;
 import com.hethond.chatbackend.services.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 
 @RestController
 @RequestMapping("/channels")

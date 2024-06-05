@@ -1,4 +1,4 @@
-package com.hethond.chatbackend;
+package com.hethond.chatbackend.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.lang.NonNull;

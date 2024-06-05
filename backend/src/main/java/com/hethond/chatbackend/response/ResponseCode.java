@@ -1,4 +1,4 @@
-package com.hethond.chatbackend;
+package com.hethond.chatbackend.response;
 
 import org.springframework.http.HttpStatus;
 

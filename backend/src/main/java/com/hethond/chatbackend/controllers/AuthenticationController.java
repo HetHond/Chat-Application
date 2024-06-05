@@ -1,8 +1,8 @@
 package com.hethond.chatbackend.controllers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hethond.chatbackend.ApiException;
-import com.hethond.chatbackend.ApiResponse;
+import com.hethond.chatbackend.exceptions.ApiException;
+import com.hethond.chatbackend.response.ApiResponse;
 import com.hethond.chatbackend.entities.AccountStatus;
 import com.hethond.chatbackend.entities.Role;
 import com.hethond.chatbackend.entities.User;
